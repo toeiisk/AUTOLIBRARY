@@ -10,6 +10,7 @@ from .forms import *
 
 
 # Create your views here.
+@login_required
 def borrow_book(request,num):
     book = Book_info.objects.get(pk=num)
     borrow_form = BorrowNotesForm()
@@ -52,7 +53,7 @@ def borrow_com(request, num):
             code ='%x' % random.getrandbits(2 * 12)
             
             send_mail(
-                     'รหัสการจองคอมพิวเตอร์',
+                     'AUTO-LIBRARY รหัสยืนยันการจองคอมพิวเตอร์',
                      'โปรดกรอกรหัสนี้เพื่อเข้าใช้คอมพิวเตอร์ : %s' %code,
                      'emailtestlibrary@gmail.com',
                      [user.email]
@@ -101,7 +102,7 @@ def borrow_tutor(request, num):
             tutorroom_id.save()
             code ='%x' % random.getrandbits(2 * 12)
             send_mail(
-                     'รหัสการจองห้องคอมพิวเตอร์',
+                     'AUTO-LIBRARY รหัสยืนยันการจองห้องติว',
                      'โปรดกรอกรหัสนี้เพื่อเข้าใช้ห้องติว : %s' %code,
                      'emailtestlibrary@gmail.com',
                      [user.email]

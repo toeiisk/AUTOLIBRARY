@@ -1,32 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <div class="d-flex justify-content-center">
 	<div class="blog-borrow mt-5 mb-5">
 		<div class="card bg-light rounded">
 			<div class="card-header border-0 text-center">
-				<h4>Purchase confirmation</h4>
+				<h4>Return confirmation</h4>
 			</div>
 			<div class="card-body">
 				<div class="card mb-5 bg-white border-0">
 					<div class="card-header border-0">
-						<h5 class="ml-3">Product - Purchase TEST</h5>
+						<h5 class="ml-3">Return - Book</h5>
 						<hr>
 						<div class="card-body">
-							<p class="card-title text-left mr-4 text-muted">Item<label
-									class="float-right text-muted">TEST</label></p>
-							<p class="card-title text-left mr-4 text-muted">Transaction number<label
-									class="float-right text-muted">TEST</label></p>
-							<p class="card-title text-left mr-4 text-muted">Transaction date<label
-									class="float-right text-muted">TEST</label></p>
-							<p class="card-title text-left mr-4 text-muted">Merchant<label
-									class="float-right text-muted">TEST</label></p>
-							<p class="card-title text-left mr-4 text-muted">Serial<label
-									class="float-right text-muted">TESR</label></p>
+							<p class="card-title text-left mr-4 text-muted">RATE<label
+									class="float-right text-muted">{{ pay.charg }}</label></p>
+							<p class="card-title text-left mr-4 text-muted">FINE<label
+									class="float-right text-muted">{{ pay.charg }}</label></p>
 						</div>
 						<div class="card-footer">
-							<p class="card-title text-left mr-4 text-dark">Order Total<label
-									class="float-right text-muted">1000 THB</label></p>
+							<p class="card-title text-left mr-4 text-dark">Total<label
+									class="float-right text-muted">{{ pay.charg }} THB</label></p>
 						</div>
 					</div>
 				</div>

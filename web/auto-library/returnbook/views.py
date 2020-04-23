@@ -27,14 +27,22 @@ def return_book(request,num):
         print(context)
         return render(request, 'return-book.html', context=context)
     else:
+        count = 0
         cal = returnbook.book_isbn.amount_book
         result = cal + 1
         check.amount_book = result
         check.save()
         returnbook.delete()
-        return redirect('dashboard')
+        return redirect('payment-complete')
 
 def return_book_last1(request, usert, returnbook):
     calculate = CalculateFines.objects.filter(borrow_user=returnbook)
     return calculate
 
+def payment(request):
+    
+    return render(request, 'payment.html', context={})
+
+def payment_complete(request):
+    
+    return render(request, 'payment-complete.html', context={})
