@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-center">
+	<div class="blog-borrow my-5">
+		<div class="test p-4 bg-dark rounded">
+			<p class="h1 text-center text-light">BORROWING</p>
+		</div>
+		<div class="text-center my-5">
+			<img class=" mb-4" src="{{ tutorroom.img_tutor.url }}" style="width: 50%;">
+			<p class="h3">Room {{ tutorroom.name_room }}</p>
+		</div>
+		<form method="POST">
+			{% csrf_token %}
+			<div class="container" style="padding-left: 5%; padding-right: 5%;">
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						{{form}}
+					</div>
+					<div style="display: none;">
+						<input type="text" value="{{date}}" id="date">
+						<input type="text" value="{{expire_date}}" id="expire_date">
+					</div>
+
+				</div>
+				<button type="Submit" class="btn btn-lg btn-block px-4 mb-5 shadow-lg mr-2 text-light"
+					style="background-color: #00adb5;">BORROW</button>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	window.onload = function () {
+		document.getElementById('id_date').value = document.getElementById('date').value
+		document.getElementById('id_expire_date').value = document.getElementById('expire_date').value
+		document.getElementById('id_date').readOnly = true;
+		document.getElementById('id_expire_date').readOnly = true;
+	}
+</script>
+{% endblock %}

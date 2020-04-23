@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500&display=swap');
+html, body {
+  font-family: 'Bai Jamjuree', sans-serif;
+  background-color: #eeeeee;
+}
+
+.navbar {
+  background-color: #222831;
+}
+
+.wrapper {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  .form-signin-heading, .checkbox {
+    margin-bottom: 30px;
+  }
+  .checkbox {
+    font-weight: normal;
+  }
+  .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    @include box-sizing(border-box);
+    &:focus {
+      z-index: 2;
+    }
+  }
+  input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  input[type="password"] {
+    margin-bottom: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+.masthead {
+  opacity: 0.8;
+  height: 80vh;
+  background-image: url('./head.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.list-book {
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+.card-img-top, .book-img {
+  width: 100%;
+  height: 20vw;
+}
+
+.book-show {
+  width: 50%;
+  height: 25vw;
+}
+
+.blog-book {
+  width: 80%;
+  min-height: auto;
+  margin: auto;
+  box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+  background: #fff;
+  border-radius: 12px;
+  max-width: 1200px;
+  position: relative;
+}
+
+.blog-borrow {
+  width: 80%;
+  box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+  background: #fff;
+  border-radius: 12px;
+  max-width: 800px;
+}
+
+.blog-profile {
+  width: 100%;
+  box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+  background: #fff;
+  border-radius: 12px;
+  max-width: 1000px;
+}

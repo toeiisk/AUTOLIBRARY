@@ -1,0 +1,111 @@
+import datetime
+from fnmatch import filter
+
+import pytz
+from django.shortcuts import render
+
+from mylibrary.models import *
+
+
+def search_book(request):
+    context = {}
+    search = request.GET.get('search', '') # get ค่าที่มาจาก search
+    context['search'] = search #กำหนดค่าให้
+    context['book'] = Book_info.objects.filter(name_book__icontains=search)
+    #เอาค่า search มาเทียบกับ name ของ Restaurnt เพื่อนำมาแสดง
+    return render(request, 'category/index.html', context=context)
+
+def math(request):
+    allbook = Book_info.objects.all()
+    publisher = Publisher.objects.all()
+    booktype = Book_type.objects.all()
+    alltype = All_type.objects.all()
+    
+    return render (request, 'category/mathpage.html',
+                    context = {
+                        'allbook' : allbook,
+                        'publisher' : publisher,
+                        'booktype' : booktype,
+                        'alltype' : alltype
+                    }
+                )
+
+def science(request):
+    allbook = Book_info.objects.all()
+    publisher = Publisher.objects.all()
+    booktype = Book_type.objects.all()
+    alltype = All_type.objects.all()
+    
+    return render (request, 'category/sciencepage.html',
+                    context = {
+                        'allbook' : allbook,
+                        'publisher' : publisher,
+                        'booktype' : booktype,
+                        'alltype' : alltype
+                    }
+                )
+                
+def blogbook(request, num):
+    book = Book_info.objects.get(pk=num)
+    booktype = Book_type.objects.all()
+    alltype = All_type.objects.all()
+    allbook = Book_info.objects.all()
+
+    amout_book = book.amount_book
+
+    return render (request, 'category/book.html',
+                    context={
+                        'book' : book,
+                        'booktype' : booktype,
+                        'alltype' : alltype,
+                        'allbook' : allbook,
+                        'amount_book' : amout_book
+                    }
+    )
+
+def computer(request):
+    count = 0
+    datenow = datetime.now()
+    computer = Computer.objects.all()
+    datenow = pytz.utc.localize(datenow)
+    datenow = datenow.replace(tzinfo=pytz.utc)
+    for i in computer:
+        # print("+++++++++++++++++++++++++++++", i.status_com, 'test1')
+        if i.status_com == 'UNAVAILABLE':
+            borrower_computer = Borrower_Computer.objects.filter(computer=i.id)
+            # print('++++++++++++++++++++++++++++++', borrower_computer)
+            if (borrower_computer[len(borrower_computer)-1].expire_date < datenow):
+                i.status_com = 'AVAILABLE'
+                # print("+++++++++++++++++++++++++++++", i.status_com, 'test1')
+                i.save()
+            print(borrower_computer[len(borrower_computer)-1].expire_date - datenow, '++++++++++')
+        if i.status_com == 'AVAILABLE':
+            count += 1
+    return render (request, 'category/computerpage.html', 
+                    context = {
+                        'count' : count,
+                        'computer' :computer
+                    }
+    )
+    
+def tutor(request):
+    count = 0
+    datenow = datetime.now()
+    tutorroom = Tutor_room.objects.all()
+    datenow = pytz.utc.localize(datenow)
+    datenow = datenow.replace(tzinfo=pytz.utc)
+    for i in tutorroom:
+        if i.status_room == 'UNAVAILABLE':
+            borrower_tutor_room = Borrower_Tutor_Room.objects.filter(tutor_room=i.id)
+            if (borrower_tutor_room[len(borrower_tutor_room)-1].expire_date < datenow):
+                i.status_room = 'AVAILABLE'
+                i.save()
+            print(borrower_tutor_room[len(borrower_tutor_room)-1].expire_date - datenow, '++++++++++')
+        if i.status_room == 'AVAILABLE':
+            count += 1
+    return render (request, 'category/tutorpage.html', 
+                    context = {
+                        'tutorroom' : tutorroom,
+                        'count' : count
+                    }
+    )

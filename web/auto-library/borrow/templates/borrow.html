@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-center">
+		<div class="blog-borrow my-5">
+			<div class="test p-4 bg-dark rounded">
+				<p class="h1 text-center text-light">BORROWING</p>
+			</div>
+			<div class="text-center my-5">
+				<img class="rounded shadow-lg mb-4" src="{{ book.img_book.url}}" style="width: 35%;">
+				<p class="h3 mt-3">{{ book.name_book }}</p>
+			</div>
+			<form>
+				{% csrf_token %}
+				<div class="container" style="padding-left: 5%; padding-right: 5%;">
+					 <div class="form-row mt-5 my-5">
+						<div class="form-group col-md-6 mt-4">
+							<label for="bookisbn"><p class="h4">BOOK ISBN</p></label>
+							<input type="text" class="form-control" value="{{ book.isbn }}" readonly>
+							<!-- {{form.book_isbn}} -->
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-12">
+							<label for="borrower"><p class="h4">BORROWER</p></label>
+							{{form.borrow_user}}
+						</div>
+					</div>
+					<div class="form-row mt-5 my-5">
+						<div class="form-group col-md-6">
+							<label for="date"><p class="h4">BORROW DATE</p></label>
+							{{form.date}}
+						</div>
+						<div class="form-group col-md-6">
+							<label for="returndate"><p class="h4">RETURN DATE</p></label>
+							{{form.return_date}}
+						</div>
+					</div>
+					 <a href="{% url 'borrowed' book.id  %}" class="btn btn-lg btn-block px-4 mb-5 shadow-lg mr-2 text-light" style="background-color: #00adb5;">BORROW</a>
+						
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12 text-center">
+                <p class="display-4 font-weight-bolder text-light">Welcome to the Auto Library</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="test mt-5">
+    <div class="container">
+        <div class="text-center">
+            <span class="h2 text-uppercase font-weight-bold text-danger">book</span>
+            <span class="h2 text-uppercase font-weight-bold">recomended</span>
+        </div>
+        <p class="h4 mt-3" style="line-height: 1.8;">เป็นหนังสือที่เหมาะกับการอ่านในช่วงเวลาว่าง สามารถอ่านได้ทุกเพศ
+            ทุกวัย
+            ช่วยให้ความรู้ ความคิด เเละคติการใช้ชีวิตต่างๆ ถ้าท่านสนใจสามารถกด 'คลิ๊กดูข้อมูลเพิ่มเติม'
+            เพื่อเข้าไปสู่คำอธิบายหนังสือคร่าวๆ เเละถ้าท่านสนใจยืมสามารถกดปุ่มยืมด้านล่างหลังจาก
+            กดดูข้อมูลเพิ่มเติม ได้เลยครับ
+        </p>
+    </div>
+</div>
+<div class="card-test mt-5 mb-5">
+    <div class="container">
+        <div class="row">
+            {% for book_list in book|slice:":4" %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <a href="{% url 'blogbook' book_list.id%}">
+                    <div class="card h-100 shadow-lg">
+                        <img class="card-img-top img-fluid" src="{{ book_list.img_book.url}}">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">{{ book_list.name_book }}</h5>
+                            <p class="card-text text-dark">สำนักพิมพ์ : {{ book_list.published_id }}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="blog mt-5 py-5 bg-light">
+    <div class="container">
+        <div class="h2 text-center">BLOG OUR</div>
+        <p class="h4 mt-3 mb-3" style="line-height: 1.8;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+            do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="row mt-5">
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">ว่าด้วยเรื่องการอ่านหนังสือ</h5>
+                        <p class="card-text">@Pondd Sugthana</p>
+                        <p class="card-text">Jul 19, 2016</p>
+                        <a href="https://medium.com/@pondd/%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AD%E0%B9%88%E0%B8%B2%E0%B8%99%E0%B8%AB%E0%B8%99%E0%B8%B1%E0%B8%87%E0%B8%AA%E0%B8%B7%E0%B8%AD-fee94ab6c155" 
+                        class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

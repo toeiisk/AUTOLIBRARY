@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="title-head py-5" style="background-color: #222831;">
+    <div class="display-4 text-center text-light">BOOK INFO</div>
+</div>
+<div class="mt-5 mb-5" style="padding-left: 20%; padding-right: 20%;">
+    <p class="my-4 display-4">{{ book.name_book }}
+    </p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mt-5 text-center">
+                <img src="{{ book.img_book.url}}" class="img-fluid rounded shadow-lg book-show">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <p class="h3 mt-5">Book Description</p>
+            <p class="h4 font-weight-light my-4 book-desc">{{ book.descri_book }}</p>
+            <p class="h3 my-3">Book About</p>
+            <p class="h4 font-weight-light">
+            <p class="h4 font-weight-light">Book ISBN : {{ book.isbn }}</p>
+                <p class="h4 font-weight-light">Publisher : {{ book.published_id.name }}</p>
+                <p class="h4 font-weight-light">Location : {{ book.location_book }}</p>
+                <p class="h4 font-weight-light">Amount : {{ book.amount_book }}</p>
+            </p>
+            {% if amount_book > 0 %}
+            <a href="{% url 'borrow_book' book.id%}" role="button" type="button" class="btn px-4 mt-3 shadow-lg mr-2 text-light" style="background-color: #00adb5;">
+                <p class="h5">BORROW</p>
+            </a>
+            {% else %}
+            <a href="#" role="button" type="button" class="btn px-4 mt-3 shadow-lg mr-2 text-light" style="background-color: #00adb5;">
+                <p class="h5">หนังสือหมด</p>
+            </a>
+            {% endif %}
+            <button type="button" class="btn btn-secondary px-4 mt-3 shadow-lg mr-2">
+                <p class="h5">EDIT</p>
+            </button>
+            <button type="button" class="btn btn-danger px-4 mt-3 shadow-lg">
+                <p class="h5">DELETE</p>
+            </button>
+        </div>
+    </div>
+
+    <p class="h2 my-5">Related Projects</p>
+    <div class="row text-center">
+        {% for at in alltype %}
+        {% if at.id == book.book_type_id.all_type_id.id %}
+            {% for bt in booktype %}
+            {% if bt.id == book.book_type_id.id %}
+                {% for ab in allbook %}
+                {% if ab.book_type_id.id == bt.id  and ab.id != book.id%}
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <a href="{% url 'blogbook' ab.id%}">
+                        <img src="{{ ab.img_book.url}}" class="img-fluid rounded shadow-lg book-img">
+                    </a>
+                </div>
+                {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

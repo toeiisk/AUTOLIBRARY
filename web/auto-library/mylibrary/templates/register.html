@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block  content%}
+{% load static %}
+<div class="container">
+    <center>
+        <h1 class="h3 mb-3 font-weight-normal m-4">Create your account</h1>
+    </center>
+
+    <form action="{% url 'register' %}" method="POST" id="new_user_form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="fname" class="sr-only">Firstname</label>
+                <input type="text" class="form-control my-4" placeholder="Firstname" required="" autofocus=""
+                    name="firstname" id="firstname">
+            </div>
+            <div class="col-sm-6">
+                <label for="Lname" class="sr-only">Lastname</label>
+                <input type="text" class="form-control my-4" placeholder="Lastname" required="" autofocus=""
+                    name="lastname" id="lastname">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputIdcard" class="sr-only">ID Card</label>
+                <input type="text" class="form-control my-4" placeholder="ID Card" required="" autofocus=""
+                    name="idcard" maxlength="13" id="idcard">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="email" class="form-control my-4" placeholder="Email address" required="" autofocus=""
+                    name="email" id="email">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputUsername" class="sr-only">Username</label>
+                <input type="username" class="form-control my-4" placeholder="Username" required="" autofocus=""
+                    name="username" id="username">
+            </div>
+            <div class="col-sm-6">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" class="form-control my-4" placeholder="Password" required="" name="password"
+                    id="password">
+            </div>
+            {% comment %} <div class="col-sm-6">
+                <label for="img_profile">Profile image</label>
+                <input type="file" class="form-control-file" id="img_profile" name="img_profile">
+            </div> {% endcomment %}
+            <button type="submit" class="btn btn-lg btn-primary btn-block my-4" value="submit" onclick="Createuser()">Register</button>
+            <p> {{error}} </p>
+        </div>
+    </form>
+</div>
+<script>
+$(document).ready(function() {
+
+});
+</script>
+{% endblock  %}
+

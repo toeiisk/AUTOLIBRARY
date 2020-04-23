@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="title-head py-5" style="background-color: #222831;">
+    <div class="display-4 text-center text-light">CATEGORY</div>
+</div>
+<div class="list-book mt-5 mb-5">
+    <div class="mb-5">
+        {% for at in alltype %}
+        {% if at.id == 1 %}
+        {% for bt in  booktype%}
+        {% if bt.all_type_id.id  == at.id%}
+        <p class="h2 font-weight-bolder my-4"> {{bt.type_book}}
+            <a class="btn btn-outline-secondary h5 float-right mr-5" data-toggle="collapse" href="#{{bt}}" role="button"
+                aria-expanded="false" aria-controls="collapseExample">See more</a>
+        </p>
+        <div class="row">
+            {% for bk in allbook|slice:":6" %}
+            {% if bk.book_type_id.id == bt.id %}
+            {% for pb in  publisher %}
+            {% if bk.published_id.id == pb.id %}
+            <div class="col-sm-3 text-center mt-4 mb-5">
+                <div class="card shadow rounded text-center mt-3 h-100">
+                    <img class="card-img-top" src="{{ bk.img_book.url}}">
+                    <div class="card-body d-flex flex-column">
+                        <p class="h4 font-weight-bold card-title">{{ bk.name_book }}</p>
+                        <p class="h5 card-text">สำนักพิมพ์: {{ bk.published_id.name }}</p>
+                        <p class="h5 card-text">จำนวนที่มี: {{ bk.amount_book }}</p>
+                        <hr>
+                        <a href="{% url 'blogbook' bk.id%}" class="btn btn-outline-info mt-auto text-center">DETAIL</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="collapse" id="{{bt}}">
+            <div class="row">
+                {% for bk in allbook|slice:"6:" %}
+                {% if bk.book_type_id.id == bt.id %}
+                {% for pb in  publisher %}
+                {% if bk.published_id.id == pb.id %}
+                <div class="col-sm-3 text-center mt-4 mb-5">
+                    <div class="card shadow rounded text-center mt-3 h-100">
+                        <img class="card-img-top" src="{{ bk.img_book.url}}">
+                        <div class="card-body d-flex flex-column">
+                            <p class="h4 font-weight-bold card-title">{{ bk.name_book }}</p>
+                            <p class="h5 card-text">สำนักพิมพ์: {{ bk.published_id.name }}</p>
+                            <p class="h5 card-text">จำนวนที่มี: {{ bk.amount_book }}</p>
+                            <hr>
+                            <a href="{% url 'blogbook' bk.id%}"
+                                class="btn btn-outline-info mt-auto text-center">DETAIL</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

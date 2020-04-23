@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="title-head py-5" style="background-color: #222831;">
+	<div class="display-4 text-center text-light">COMPUTER</div>
+</div>
+<div class="list-book mt-5 mb-5">
+	<div class="container">
+		<div class="text-center">
+			{% if messages %}
+			{% for message in messages %}
+			<div class="alert alert-warning alert-dismissible fade show mb-4 p-3" role="alert">
+				<strong>Goodddddd!</strong> {{ message }}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			{% endfor %}
+			{% endif %}
+			<img class="mt-4 mb-5" src="{% static 'admin.png' %}" style="width: 10vw;">
+			<p class="h4 font-weight-bold">จำนวนเครื่องที่ว่าง: {{ count }}</p>
+		</div>
+		<hr>
+		<div class="row mt-5">
+			{% for com in computer %}
+			<div class="col-sm-3 text-center mt-5">
+				<img class="mb-3" src="{{ com.img_com.url}}" style="width: 10vw;">
+				<p class="h4 font-weight-bold text-center">{{com.name_com}}</p>
+				{% if com.status_com == 'UNAVAILABLE' %}
+				<p class="h5 text-center text-danger">{{com.status_com}}</p>
+				{% else %}
+				<p class="h5 text-center ">{{com.status_com}}</p>
+				{% endif %}
+				{% if com.status_com == 'AVAILABLE' %}
+				<a href="{% url 'borrow_com' com.id %}" class="btn btn-outline-info text-center mt-3">BORROW</a>
+				{% endif %}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock %}

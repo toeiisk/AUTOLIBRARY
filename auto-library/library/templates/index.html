@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-2">
+        <p class="display-4">Library</p>
+    </div>
+    <div class="col-4">
+        <p class="h3 font-weight-light mt-4">Loremipsum</p>
+    </div>
+    <div class="col-6">
+        <form class="form-inline d-inline float-right mt-4">
+            <input class="form-control mr-sm-2" type="search"
+                placeholder="Search book..."
+                aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="d-inline">
+    <div class="mt-3">
+        <button type="button" class="btn btn-light"><p class="h5">Fiction</p></button>
+        <button type="button" class="btn btn-light"><p class="h5">Comic</p></button>
+        <button type="button" class="btn btn-light"><p class="h5">Research</p></button>
+        <button type="button" class="btn btn-light"><p class="h5">Technology</p></button>
+        <button type="button" class="btn btn-light"><p class="h5">Education</p></button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-4 col-lg-3">
+        <div class="card bg-dark text-white">
+            <img class="card-img" src="{% static '1.jpg' %}" alt="Card image">
+            <div class="card-img-overlay">
+                <p class="card-text container h5">This is a wider card with supporting text
+                    below as a natural lead-in to additional content. This
+                    content is a little bit longer.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-3">
+        <div class="card bg-dark text-white">
+            <img class="card-img" src="{% static '1.jpg' %}" alt="Card image">
+            <div class="card-img-overlay">
+                <p class="card-text container h5">This is a wider card with supporting text
+                    below as a natural lead-in to additional content. This
+                    content is a little bit longer.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-3">
+        <div class="card bg-dark text-white">
+            <img class="card-img" src="{% static '1.jpg' %}" alt="Card image">
+            <div class="card-img-overlay">
+                <p class="card-text container h5">This is a wider card with supporting text
+                    below as a natural lead-in to additional content. This
+                    content is a little bit longer.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-3">
+        <div class="card bg-dark text-white">
+            <img class="card-img" src="{% static '1.jpg' %}" alt="Card image">
+            <div class="card-img-overlay">
+                <p class="card-text container h5">This is a wider card with supporting text
+                    below as a natural lead-in to additional content. This
+                    content is a little bit longer.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

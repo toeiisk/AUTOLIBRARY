@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-center">
+	<div class="blog-borrow my-5">
+		<div class="test p-4 bg-dark rounded">
+			<p class="h1 text-center text-light">RETURN BOOK</p>
+		</div>
+		{% for gt in get_return %}
+		<div class="text-center my-5">
+			<img class="rounded shadow-lg mb-4" src="{{ gt.borrow_user.book_isbn.img_book.url}}" style="width: 35%;">
+			<p class="h3 mt-3">{{ gt.borrow_user.book_isbn.name_book }}</p>
+		</div>
+		
+		<form>
+		{% csrf_token %}
+			<div class="container" style="padding-left: 5%; padding-right: 5%;">
+				<div class="form-row mt-5 my-5">
+					<div class="form-group col-md-6 mt-4">
+						<label for="bookisbn">
+							<p class="h4">BOOK ISBN</p>
+						</label>
+						<input type="text" class="form-control" value="{{ book.isbn }}" readonly>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="borrower">
+							<p class="h4">BORROWER</p>
+						</label>
+						{{form.borrow_user}}
+					</div>
+				</div>
+				<div class="form-row mt-5 my-5">
+					<div class="form-group col-md-6">
+						<label for="date">
+							<p class="h4">RETURN DATE</p>
+						</label>
+						{{form.return_date}}
+					</div>
+					<div class="form-group col-md-6">
+						<label for="returndate">
+							<p class="h4">NOW</p>
+						</label>
+						{{form.date}}
+					</div>
+				</div>
+				<div class="form-row mt-5 my-5">
+					<div class="form-group col-md-6">
+						<label for="date">
+							<p class="h4">FINE</p>
+						</label>
+						<input type="text" class="form-control" value="{{ book.isbn }}" readonly>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="returndate">
+							<p class="h4">LIBRARIAN</p>
+						</label>
+						<input type="text" class="form-control" value="{{ book.isbn }}" readonly>
+					</div>
+				</div>
+		{% endfor %}
+				<button type="button" class="btn btn-lg btn-block px-4 mb-5 shadow-lg mr-2 text-light">
+					<p class="h5">RETURN</p>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}

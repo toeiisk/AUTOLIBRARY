@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="title-head py-5" style="background-color: #222831;">
+	<div class="display-4 text-center text-light">BOOK</div>
+</div>
+<div class="list-book mt-5 mb-5">
+	{% if search %}
+	<div class="row">
+		{% for bk in book %}
+		<div class="col-sm-3 mb-5">
+			<div class="card shadow rounded mt-3 text-center h-100">
+				<img class="card-img-top" src="{{ bk.img_book.url }}">
+				<div class="card-body d-flex flex-column">
+					<p class="h4 font-weight-bold card-title">{{ bk.name_book }}</p>
+					<p class="h5 card-text">สำนักพิมพ์: {{ bk.published_id.name }}</p>
+					<p class="h5 card-text">จำนวนที่มี: {{ bk.amount_book }}</p>
+					<hr>
+					<a href="{% url 'blogbook' bk.id%}" class="btn btn-outline-info mt-auto text-center">DETAIL</a>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	{% else %}
+	<p class="h1 text-center font-weight-light">There are no books.</p>
+	{% endif %}
+</div>
+{% endblock %}
