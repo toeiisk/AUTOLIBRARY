@@ -3,9 +3,9 @@ import datetime
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-
+from django.core.mail import send_mail
 from mylibrary.models import *
-
+import random
 from .forms import *
 
 
@@ -49,7 +49,14 @@ def borrow_com(request, num):
                 post.save()
             computer_id.status_com = 'UNAVAILABLE'
             computer_id.save()
-
+            code ='%x' % random.getrandbits(2 * 12)
+            
+            send_mail(
+                     'รหัสการจองคอมพิวเตอร์',
+                     'โปรดกรอกรหัสนี้เพื่อเข้าใช้คอมพิวเตอร์ : %s' %code,
+                     'emailtestlibrary@gmail.com',
+                     [user.email]
+                )   
             messages.success(request, 'Computer Booking is complete :)')
         return redirect('computer')
 
@@ -92,7 +99,13 @@ def borrow_tutor(request, num):
                 post.save()
             tutorroom_id.status_room = 'UNAVAILABLE'
             tutorroom_id.save()
-
+            code ='%x' % random.getrandbits(2 * 12)
+            send_mail(
+                     'รหัสการจองห้องคอมพิวเตอร์',
+                     'โปรดกรอกรหัสนี้เพื่อเข้าใช้ห้องติว : %s' %code,
+                     'emailtestlibrary@gmail.com',
+                     [user.email]
+                )  
             messages.success(request, 'Room Booking is complete :)')
         return redirect('tutor')
 

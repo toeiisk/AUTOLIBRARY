@@ -30,12 +30,6 @@ def auth_login(request):
             if next_url: 
                 return redirect(next_url)
             else:
-                # send_mail(
-                #     'test mail',
-                #     'test email',
-                #     'emailtestlibrary@gmail.com',
-                #     ['parametprame2@gmail.com']
-                # )   
                 return redirect('index')
         else:
             error = "Username or Password Incorrect!!"
