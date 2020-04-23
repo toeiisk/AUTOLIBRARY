@@ -59,7 +59,7 @@ def borrow_com(request, num):
         'form': borrow_form,
         'computer': computer_id,
         'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        'expire_date': (datetime.now()+timedelta(minutes=1)).strftime("%Y-%m-%d %H:%M:%S")
+        'expire_date': (datetime.now()+timedelta(minutes=15)).strftime("%Y-%m-%d %H:%M:%S")
     })
 
 @login_required
@@ -102,5 +102,5 @@ def borrow_tutor(request, num):
         'form': borrow_form,
         'tutorroom': tutorroom_id,
         'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        'expire_date': (datetime.now()+timedelta(minutes=1)).strftime("%Y-%m-%d %H:%M:%S")
+        'expire_date': (datetime.now()+timedelta(minutes=15)).strftime("%Y-%m-%d %H:%M:%S")
     })

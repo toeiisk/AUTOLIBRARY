@@ -95,7 +95,7 @@ class Borrower_Computer(models.Model):
     borrow_user = models.ForeignKey(User , on_delete=models.CASCADE)
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
     date = models.DateTimeField(default=datetime.now())
-    expire_date = models.DateTimeField(default=datetime.now()+timedelta(minutes=1))
+    expire_date = models.DateTimeField(default=datetime.now()+timedelta(minutes=15))
     def __str__(self):
         return '(%s) %s' %(self.id, self.borrow_user)
 
