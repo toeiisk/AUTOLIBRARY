@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
 from django.core.mail import send_mail
+from django.contrib import messages
 from mylibrary.models import *
 
 
@@ -67,6 +68,8 @@ def register(request):
                         idcard = idcard_value,
                     )
                     idcard.save()
+                    messages.success(request, 'Successfully registered and logged in')
+                    return redirect('login')
                 else:
                     idcard = idcard[0]
                     print(idcard.user_id, idcard)

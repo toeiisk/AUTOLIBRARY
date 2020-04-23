@@ -30,7 +30,7 @@ def borrow_com(request, num):
         if (borrower_com):
             com = Computer.objects.get(pk=borrower_com[len(borrower_com)-1].computer.id)
             if com.status_com == 'UNAVAILABLE':
-                messages.error(request, 'คุณมีเครื่องที่ยังยืมอยู่')
+                messages.info(request, 'คุณมีเครื่องที่ยังยืมอยู่')
             else:
                 status = True
         else:

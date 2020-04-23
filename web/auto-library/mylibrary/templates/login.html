@@ -2,65 +2,29 @@
 {% load static %}
 {% block content %}
 <div class="wrapper">
+    <div class="container">
+        {% if messages %}
+				{% for message in messages %}
+					{% if message.tags %}
+					<div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-5 p-3" role="alert">
+						<p class="h3 font-weight-bolder">{{message}}</p class="h3 font-weight-bolder"> 
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+    </div>
+
     <form class="form-signin" action="{% url 'login' %}" method="POST">
-    {% csrf_token %}
+        {% csrf_token %}
         <h2 class="form-signin-heading mb-3">Please login</h2>
-        <input type="text" class="form-control mb-3" name="username"
-            placeholder="Email Address" required="" autofocus="" />
-        <input type="password" class="form-control mb-3" name="password"
-            placeholder="Password" required="" />
+        <input type="text" class="form-control mb-3" name="username" placeholder="Email Address" required=""
+            autofocus="" />
+        <input type="password" class="form-control mb-3" name="password" placeholder="Password" required="" />
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         {{error}}
     </form>
 </div>
 {% endblock %}
-
-<!-- <input type="text" class="form-control mb-3" name="username" placeholder="Username" required=""
-            onkeyup="check_login(this);return false;" data-url="{% url 'check_login' %}" />
-        <div id="login_not">
-            <span class="text-danger">Username already taken.</span>
-        </div>
-        <div id="login_ok">
-            <span class="text-danger">Username available.</span>
-        </div> -->
-<!-- <label for="login" class="col-md-2 control-label">Login</label>
-<div class="col-md-4">
-    <input type="text" class="form-control input-sm" name="login" id="login" placeholder="Login or Username"
-        required="True" maxlength="40" onkeyup="check_login(this);return false;"
-        data-url="{% url 'check_login' %}" />
-    {% csrf_token %}
-</div>
-<div class="col-md-6 col-sm-6" style="color:red;display:none;margin-top: 4px;" id="login_not">
-    <span class="glyphicon glyphicon-remove"></span> Username already taken.
-</div>
-<div class="col-md-6 col-sm-6" style="color: green;display: none;margin-top: 4px;" id="login_ok">
-    <span class="glyphicon glyphicon-ok"></span> Username available.
-</div> -->
-
-<!-- <script>
-    function check_login(element) {
-        $("#login_ok").hide();
-        $("#login_not").hide();
-        login = $(element).val();
-        if (login == "") {
-            return;
-        }
-        $.ajax({
-            url: $(element).attr("data-url"),
-            data: {
-                "csrfmiddlewaretoken": $(element).siblings("input[name='csrfmiddlewaretoken']").val(),
-                "login": login
-            },
-            method: "POST",
-            dataType: "json",
-            success: function (data) {
-                //console.log(data);
-                if (data.is_success) {
-                    $("#login_ok").show();
-                } else {
-                    $("#login_not").show();
-                }
-            }
-        });
-    }
-</script> -->
