@@ -82,7 +82,6 @@ def my_logout(request):
     logout(request)
     return redirect('index')
 
-
 def borrowed(request, num):
     user = request.user
     dateborrow = datetime.now()
@@ -114,28 +113,3 @@ def dashboard(request):
                   'username': username
         }
     )
-
-# def check_login(request):
-#     if request.method == "GET":
-#         raise Http404("URL doesn't exitsts")
-#     else:
-#         response_data = {}
-#         login = request.POST['username']
-#         user = None
-#         try:
-#             try:
-#                 user = User.objects.get(login = login)
-#             except ObjectDoesNotExist as e:
-#                 pass
-#             except Exception as e:
-#                 raise e
-#             if not user:
-#                 response_data["is_success"] = True
-#             else:
-#                 response_data["is_success"] = False
-#         except Exception as e:
-#             response_data["is_success"] = False
-#             response_data["msg"] = "Some error."
-        
-#         return JsonResponse(response_data)
-
