@@ -31,6 +31,12 @@ def borrow_book(request, num):
         total =  number - num
         book.amount_book = total
         book.save()
+
+        date_return = post.return_date
+        user_book_note = post
+        postreturn = CalculateFines(date=date_return, borrow_user=user_book_note, user_id=user, charg=0)
+        postreturn.status_cal = 'UNCOMPLETE'
+        postreturn.save()
         return redirect('dashboard')
 
     borrow_form = BorrowNotesForm()

@@ -15,6 +15,9 @@
 					<div class="card-header border-0">
 						<h5 class="ml-3">Return - Book</h5>
 						<hr>
+						{% for cl in calculatefine %}
+							{{ cl.status_cal }}
+						{% endfor %}
 						{% if checkpay == 1 %}
 							
 							<div class="card-body">

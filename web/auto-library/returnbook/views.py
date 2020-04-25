@@ -5,49 +5,66 @@ from django.shortcuts import render, redirect
 # Create your views here.
 def return_book(request,num):
     returnbook = Borrow_Notes.objects.get(pk=num)
-    return_form = ReturnBookForm()
-    datenow = datetime.now().date()
-    datereturn = returnbook.return_date.date()
-    user = request.user
-    Diff = (datenow - datereturn)
-    count = (Diff.days*10)
-    postreturn = CalculateFines.objects.filter(borrow_user=returnbook)
+    calculatefine = CalculateFines.objects.filter(borrow_user=returnbook)
+    
     # เช็คจำนวนหนังสือ
     check = Book_info.objects.get(pk=returnbook.book_isbn.id)
-
-    if count > 0:
-        if len(postreturn) == 0:
-            postreturn = CalculateFines(date=datenow,  borrow_user=returnbook, user_id=user, charg=count)
-            postreturn.status_cal = 'COMPLETE'
-            postreturn.save()
-        
-        get_return = return_book_last1(returnbook)
-        context = {
-            'get_return' : get_return,
-        }  
-        return render(request, 'payment.html', context=context)
-    else:
-        postreturn = CalculateFines(date=datenow,  borrow_user=returnbook, user_id=user, charg=0)
-        postreturn.status_cal = 'COMPLETE'
-        postreturn.save()
-
-        rate = 0
-        checkpay = 0      
-        cal = returnbook.book_isbn.amount_book
-        result = cal + 1
+    for i in calculatefine:
+        chek_date = i.date.date()
+    
+    datenow = datetime.now().date()
+    Diff = (chek_date - datenow)
+    count = ( Diff.days * 10)
+    
+    if count <= 0:
+        for i in calculatefine:
+            if i.status_cal == 'UNCOMPLETE':
+                i.status_cal = 'COMPLETE'
+                i.save()
+        addbook = returnbook.book_isbn.amount_book
+        result = addbook + 1
         check.amount_book = result
         check.save()
         returnbook.delete()
         return render(request, 'payment-complete.html', context={
-            'rate' : rate,
-            'postreturn' : postreturn,
-            'checkpay' : checkpay
+            'calculatefine' : calculatefine
+        })
+    else:
+        for i in calculatefine:
+            i.charg = count
+            i.save()
+        addbook = returnbook.book_isbn.amount_book
+        result = addbook + 1
+        check.amount_book = result
+        check.save()
+        returnbook.delete()
+        return render(request, 'payment-complete.html', context={
+            'calculatefine' : calculatefine
         })
 
-# def return_book_last1(returnbook):
-#     calculate = CalculateFines.objects.filter(borrow_user=returnbook)
-#     return calculate
+    # if count > 0:
+    #     if len(postreturn) == 0:
+    #         postreturn = CalculateFines(date=datenow,  borrow_user=returnbook, user_id=user, charg=count)
+    #         postreturn.status_cal = 'COMPLETE'
+    #         postreturn.save()
+        
+    #     get_return = return_book_last1(returnbook)
+    #     context = {
+    #         'get_return' : get_return,
+    #     }  
+    #     return render(request, 'payment.html', context=context)
+    # else:
+    #     postreturn = CalculateFines(date=datenow,  borrow_user=returnbook, user_id=user, charg=0)
+    #     postreturn.status_cal = 'COMPLETE'
+    #     postreturn.save()
 
+    #     rate = 0
+    #     checkpay = 0      
+    #     cal = returnbook.book_isbn.amount_book
+    #     result = cal + 1
+    #     check.amount_book = result
+    #     check.save()
+    #     returnbook.delete()
 # def payment(request):
     
 #     return render(request, 'payment.html', context={})
