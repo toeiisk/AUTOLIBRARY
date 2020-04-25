@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'category',
     'borrow',
     'returnbook',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

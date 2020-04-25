@@ -1,12 +1,13 @@
+import json
 from datetime import date, datetime, timedelta
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.views import auth_logout
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
-from django.core.mail import send_mail
-from django.contrib import messages
 from mylibrary.models import *
 
 
@@ -117,3 +118,7 @@ def dashboard(request):
                   'username': username
         }
     )
+
+def addbook(request):
+    if request.method == "POST":
+        data = json.loads
