@@ -80,7 +80,8 @@ class CalculateFines(models.Model):
     charg = models.IntegerField(default='1')
     borrow_user = models.ForeignKey(Borrow_Notes, null=True, on_delete=models.SET_NULL)
     status_cal = models.CharField(max_length=12, choices=STATUS, default=UNCOMPLETE)
-    def __str__(self):
+    name_book =  models.CharField(max_length=250)
+    def str(self):
         return '(%s) %s' %(self.id, self.user_id)
     
 class Borrower_Tutor_Room(models.Model):

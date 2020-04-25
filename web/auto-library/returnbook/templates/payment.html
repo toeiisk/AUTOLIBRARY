@@ -14,15 +14,15 @@
 				<p class="card-title text-left mr-4 h5 text-light">Purchase Summary<label
 						class="float-right text-light">Quantity</label></p>
 				<hr>
-				{% for gt in get_return %}
+				{% for cl in calculatefine %}
 				<div class="row">
 					<p class="col-10 h4 text-white text-right">Total including VAT</p>
-					<p class="col-2 h4 text-white text-center">{{gt.charg}} $</p>
+					<p class="col-2 h4 text-white text-center">{{cl.charg}} $</p>
 				</div>
 				<hr>
 				<div class="container">
 				{% comment %} {% url 'payment-complete' gt.id %} {% endcomment %}
-					<form action="{% url 'payment-complete' gt.id %}" method="POST">
+					<form action="{% url 'payment-complete' cl.id %}" method="POST">
 						{% csrf_token %}
 						<div class="card bg-light mt-2">
 							<div class="card-header border-0 text-dark">
