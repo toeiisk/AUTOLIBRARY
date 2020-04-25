@@ -122,3 +122,23 @@ def dashboard(request):
 def addbook(request):
     if request.method == "POST":
         data = json.loads
+
+def checkbook(request):
+    history = CalculateFines.objects.all()
+    return render(request, 'checkbook.html', context={
+        'history' : history
+    })
+
+def checkcom(request):
+    checkcom = Borrower_Computer.objects.all()
+    
+    return render(request, 'checkcom.html', context={
+        'checkcom' : checkcom,
+        
+    })
+
+def checktutorroom(request):
+    checkroom = Borrower_Tutor_Room.objects.all()
+    return render(request, 'checktutorroom.html', context={
+        'checkroom' : checkroom
+    })

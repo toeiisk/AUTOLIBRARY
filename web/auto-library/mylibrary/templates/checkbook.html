@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="title-head py-5" style="background-color: #222831;">
+	<div class="display-4 text-center text-light">WEB KHONG PRAME</div>
+</div>
+<div class="container mt-5 mb-5">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Name Book</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for hi in history %}
+          <tr>
+            <td>{{ hi.user_id }}</td>
+            <td>{{ hi.name_book }}</td>
+            {% if hi.status_cal == 'UNCOMPLETE' %}
+            <td class="text-danger">{{ hi.status_cal }}</td>
+            {% else %}
+            <td class="text-success">{{ hi.status_cal }}</td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+{% endblock %}

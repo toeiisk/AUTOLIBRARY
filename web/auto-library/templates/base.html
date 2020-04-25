@@ -46,6 +46,18 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item dropdown">
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <li class="nav-item">
+              <a class="nav-link h5 text-light" href="{% url 'checkbook' %}">Check Book</a>
+            <li class="nav-item">
+              <a class="nav-link h5 text-light" href="{% url 'checkcom' %}">Check Computer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link h5 text-light" href="{% url 'checktutorroom' %}">Check Tutorroom</a>
+            </li>
+            </li>
+            {% else %}
             <a class="nav-link dropdown-toggle h5 text-light" href="#" id="navbarDropdown" role="button"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Category
@@ -55,13 +67,38 @@
               <a class="dropdown-item" href="{% url 'science' %}">SCIENCE</a>
               <a class="dropdown-item" href="#">Lorem ipsum</a>
             </div>
+            <li class="nav-item">
+              <a class="nav-link h5 text-light" href="{% url 'computer' %}">Computer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link h5 text-light" href="{% url 'tutor' %}">TutorRoom</a>
+            </li>
+            {% endif %}
+            {% endif %}
+            {% if user.is_anonymous  %}
+            <a class="nav-link dropdown-toggle h5 text-light" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Category
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'math' %}">MATH</a>
+              <a class="dropdown-item" href="{% url 'science' %}">SCIENCE</a>
+              <a class="dropdown-item" href="#">Lorem ipsum</a>
+            </div>
+            <li class="nav-item">
+              <a class="nav-link h5 text-light" href="{% url 'computer' %}">Computer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link h5 text-light" href="{% url 'tutor' %}">TutorRoom</a>
+            </li>
+            {% endif %} 
           </li>
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             <a class="nav-link h5 text-light" href="{% url 'computer' %}">Computer</a>
           </li>
           <li class="nav-item">
             <a class="nav-link h5 text-light" href="{% url 'tutor' %}">TutorRoom</a>
-          </li>
+          </li> {% endcomment %}
         </ul>
         <ul class="navbar-nav">
           <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search_book' %}">

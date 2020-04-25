@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="title-head py-5" style="background-color: #222831;">
+	<div class="display-4 text-center text-light">WEB KHONG PRAME</div>
+</div>
+<div class="container mt-5 mb-5">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ผู้ที่จองพิวเตอร์</th>
+            <th scope="col">เครื่องที่จอง</th>
+            <th scope="col">เวลาที่จอง</th>
+            <th scope="col">หมดเวลาจอง</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cc in checkcom reversed%}
+          <tr>
+            <td>{{ cc.borrow_user }}</td>
+            <td>{{ cc.computer }}</td>
+            <td>{{ cc.date }}</td>
+            <td>{{ cc.expire_date }}</td>           
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+{% endblock %}
