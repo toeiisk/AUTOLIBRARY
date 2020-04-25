@@ -13,38 +13,37 @@
 			<div class="card-body">
 				<div class="card mb-5 bg-white border-0">
 					<div class="card-header border-0">
-						<h5 class="ml-3">Return - Book</h5>
-						<hr>
+						{% if paycheck == 1 %}
 						{% for cl in calculatefine %}
-							{{ cl.status_cal }}
-						{% endfor %}
-						{% if checkpay == 1 %}
-							
+						<h5 class="ml-3">Return - Book ----> {{cl.name_book}}</h5>
+						<hr>													
 							<div class="card-body">
-								<p class="card-title text-left mr-4 text-muted">RATE<label
-									class="float-right text-muted">{{ rate_date }}</label></p>
-							{% for rs in result %}	
-								<p class="card-title text-left mr-4 text-muted">FINE<label
-									class="float-right text-muted">{{  rs.charg  }}</label></p>
+								<p class="card-title text-left mr-4 text-muted">RATE  {{ rate }} Days<label
+									class="float-right text-muted"></label></p>
+								<p class="card-title text-left mr-4 text-muted">FINE {{ cl.charg }} <label
+									class="float-right text-muted"></label></p>
 							</div>
 							<div class="card-footer">
 								<p class="card-title text-left mr-4 text-dark">Total<label
-									class="float-right text-muted">{{  rs.charg }} THB</label></p>
+									class="float-right text-muted">{{ cl.charg }} THB</label></p>
+							</div>
+						{% endfor %}
+						
+						{% else %}
+							{% for ch in result %}
+							<h5 class="ml-3">Return - Book ----> {{ch.name_book}}</h5>
+							<hr>
+							<div class="card-body">
+								<p class="card-title text-left mr-4 text-muted">RATE  {{ rate_date }} Days<label
+									class="float-right text-muted"></label></p>
+								<p class="card-title text-left mr-4 text-muted">FINE {{ ch.charg }} <label
+									class="float-right text-muted"></label></p>							
+							</div>
+							<div class="card-footer">
+								<p class="card-title text-left mr-4 text-dark">Total<label
+									class="float-right text-muted">  {{ ch.charg }} THB</label></p>
 							</div>
 							{% endfor %}
-						<br>
-						<p class="card-title text-center mt-5 text-muted">Thank you for using Auto-Library!</p>
-						{% else %}
-							<div class="card-body">
-								<p class="card-title text-left mr-4 text-muted">RATE<label
-									class="float-right text-muted">{{ rate }}</label></p>
-								<p class="card-title text-left mr-4 text-muted">FINE<label
-									class="float-right text-muted">{{ postreturn.charg }}</label></p>
-							</div>
-							<div class="card-footer">
-								<p class="card-title text-left mr-4 text-dark">Total<label
-									class="float-right text-muted">{{ postreturn.charg }} THB</label></p>
-							</div>
 						{% endif %}
 					</div>
 				</div>
