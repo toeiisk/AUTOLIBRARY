@@ -47,7 +47,7 @@ class Borrow_NotesAdmin(admin.ModelAdmin):
     search_fields = ['book_isbn']
 
 class CalculateFinesAdmin(admin.ModelAdmin):
-    list_display = ['id', 'borrow_user', 'date', 'charg', 'status_cal']
+    list_display = ['id', 'user_id' ,'borrow_user', 'date', 'charg', 'status_cal']
     list_per_page = 15
     search_fields = ['status_cal']
 
