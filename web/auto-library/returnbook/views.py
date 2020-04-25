@@ -18,6 +18,7 @@ def return_book(request,num):
     if count > 0:
         if len(postreturn) == 0:
             postreturn = CalculateFines(date=datenow,  borrow_user=returnbook, user_id=user, charg=count)
+            postreturn.status_cal = 'COMPLETE'
             postreturn.save()
         
         get_return = return_book_last1(returnbook)
@@ -27,7 +28,9 @@ def return_book(request,num):
         return render(request, 'payment.html', context=context)
     else:
         postreturn = CalculateFines(date=datenow,  borrow_user=returnbook, user_id=user, charg=0)
+        postreturn.status_cal = 'COMPLETE'
         postreturn.save()
+
         rate = 0
         checkpay = 0      
         cal = returnbook.book_isbn.amount_book
@@ -39,16 +42,15 @@ def return_book(request,num):
             'rate' : rate,
             'postreturn' : postreturn,
             'checkpay' : checkpay
-
         })
 
-def return_book_last1(returnbook):
-    calculate = CalculateFines.objects.filter(borrow_user=returnbook)
-    return calculate
+# def return_book_last1(returnbook):
+#     calculate = CalculateFines.objects.filter(borrow_user=returnbook)
+#     return calculate
 
-def payment(request):
+# def payment(request):
     
-    return render(request, 'payment.html', context={})
+#     return render(request, 'payment.html', context={})
 
 def payment_complete(request, num):
     
