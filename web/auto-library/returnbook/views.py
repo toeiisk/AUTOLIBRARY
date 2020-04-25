@@ -53,6 +53,8 @@ def return_book(request,num):
 #     return render(request, 'payment.html', context={})
 
 def payment_complete(request, num):
+    
+    
     result =  CalculateFines.objects.filter(pk=num).values()
     datenow = datetime.now().date()
     checkpay = 1
@@ -60,6 +62,7 @@ def payment_complete(request, num):
         # ดึง id ของ user ใน Model Calculate
         test = i['borrow_user_id'] 
 
+    
     note_borrow = Borrow_Notes.objects.get(pk=test)
     check = Book_info.objects.get(pk=note_borrow.book_isbn.id)    
     return_date = note_borrow.return_date.date()

@@ -17,6 +17,7 @@ class BorrowNotesForm(forms.ModelForm):
         "date": "DATE",
         "return_date": "RETURN_DATE",
     }
+   
 
 class BorrowComForm(forms.ModelForm):
     class Meta:
@@ -30,6 +31,7 @@ class BorrowComForm(forms.ModelForm):
         "date": "DATE",
         "expire_date": "EXPIRE_DATE",
     }
+
 
 class BorrowTutorForm(forms.ModelForm):
     class Meta:
