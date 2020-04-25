@@ -62,8 +62,8 @@ class Book_info(models.Model):
 
 class Borrow_Notes(models.Model):
     book_isbn = models.ForeignKey(Book_info, on_delete=models.PROTECT)
-    date = models.DateTimeField()
-    return_date = models.DateTimeField()
+    date = models.DateTimeField(default=datetime.now())
+    return_date = models.DateTimeField(default=datetime.now()+timedelta(days=7))
     borrow_user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return '(%s) %s' %(self.id, self.borrow_user)

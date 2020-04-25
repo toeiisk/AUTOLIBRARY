@@ -10,7 +10,7 @@
 				<img class="rounded shadow-lg mb-4" src="{{ book.img_book.url}}" style="width: 35%;">
 				<p class="h3 mt-3">{{ book.name_book }}</p>
 			</div>
-			<form>
+			{% comment %} <form>
 				{% csrf_token %}
 				<div class="container" style="padding-left: 5%; padding-right: 5%;">
 					 <div class="form-row mt-5 my-5">
@@ -36,10 +36,22 @@
 							{{form.return_date}}
 						</div>
 					</div>
-					 <a href="{% url 'borrowed' book.id  %}" class="btn btn-lg btn-block px-4 mb-5 shadow-lg mr-2 text-light" style="background-color: #00adb5;">BORROW</a>
+					 <a href="{% url 'borrow_book' book.id  %}" class="btn btn-lg btn-block px-4 mb-5 shadow-lg mr-2 text-light" style="background-color: #00adb5;">BORROW</a>
 						
 				</div>
-			</form>
+			</form> {% endcomment %}
+			<form method="POST">
+			{% csrf_token %}
+			<div class="container" style="padding-left: 5%; padding-right: 5%;">
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						{{form}}
+					</div>
+				</div>
+				<button type="Submit" class="btn btn-lg btn-block px-4 mb-5 shadow-lg mr-2 text-light"
+					style="background-color: #00adb5;">BORROW</button>
+			</div>
+		</form>
 		</div>
 	</div>
 {% endblock %}

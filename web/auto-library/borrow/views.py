@@ -11,8 +11,28 @@ from .forms import *
 
 # Create your views here.
 @login_required
-def borrow_book(request,num):
+def borrow_book(request, num):
     book = Book_info.objects.get(pk=num)
+    user = request.user
+    if request.method == 'POST':
+        form = BorrowNotesForm(request.POST)
+        if form.is_valid():            
+            date = form.cleaned_data['date']
+            return_date = form.cleaned_data['return_date']
+            post = Borrow_Notes(
+                book_isbn = book, 
+                borrow_user = user,
+                date = date,
+                return_date = return_date
+            )
+            post.save()
+        num = 1
+        number = book.amount_book
+        total =  number - num
+        book.amount_book = total
+        book.save()
+        return redirect('dashboard')
+
     borrow_form = BorrowNotesForm()
     return render(request, 'borrow.html', context={
         'form': borrow_form,
