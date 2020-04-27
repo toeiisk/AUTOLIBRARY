@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="title-head py-5" style="background-color: #222831;">
-    <div class="display-4 text-center text-light">CATEGORY</div>
+    <div class="display-4 text-center text-light"><i class="fas fa-square-root-alt mx-3"></i>CATEGORY</div>
 </div>
 <div class="list-book mt-5 mb-5">
     <div class="mb-5">
@@ -15,10 +15,10 @@
                 aria-expanded="false" aria-controls="collapseExample">See more</a>
         </p>
         <div class="row">
-            {% for bk in allbook|slice:":6" %}
+            {% for bk in allbook %}
             {% if bk.book_type_id.id == bt.id %}
-            {% for pb in  publisher %}
-            {% if bk.published_id.id == pb.id %}
+            {% for pb in  publisher%}
+            {% if bk.published_id.id == pb.id|slice:":1" %}
             <div class="col-sm-3 text-center mt-4 mb-5">
                 <div class="card shadow rounded text-center mt-3 h-100">
                     <img class="card-img-top" src="{{ bk.img_book.url}}">
@@ -28,8 +28,10 @@
                         <p class="h5 card-text">จำนวนที่มี: {{ bk.amount_book }}</p>
                         <hr>
                         <a href="{% url 'blogbook' bk.id%}" class="btn btn-outline-info mt-auto text-center">DETAIL</a>
+                        {% if user.is_superuser %}
                         <a href="{% url 'book_delete' num=bk.id %}" class="btn btn-outline-danger mt-auto text-center"
                             onclick="return confirm('Are you sure you want to delete this?')">DELETE</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -41,10 +43,10 @@
 
         <div class="collapse" id="{{bt}}">
             <div class="row">
-                {% for bk in allbook|slice:"6:" %}
+                {% for bk in allbook %}
                 {% if bk.book_type_id.id == bt.id %}
                 {% for pb in  publisher %}
-                {% if bk.published_id.id == pb.id %}
+                {% if bk.published_id.id == pb.id|slice:"1:" %}
                 <div class="col-sm-3 text-center mt-4 mb-5">
                     <div class="card shadow rounded text-center mt-3 h-100">
                         <img class="card-img-top" src="{{ bk.img_book.url}}">
@@ -55,9 +57,11 @@
                             <hr>
                             <a href="{% url 'blogbook' bk.id%}"
                                 class="btn btn-outline-info mt-auto text-center">DETAIL</a>
+                            {% if user.is_superuser %}
                             <a href="{% url 'book_delete' num=bk.id %}"
                                 class="btn btn-outline-danger mt-auto text-center"
                                 onclick="return confirm('Are you sure you want to delete this?')">DELETE</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
