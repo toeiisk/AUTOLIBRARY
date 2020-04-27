@@ -1,11 +1,10 @@
-import datetime
-from fnmatch import filter
-
 import pytz
-from django.shortcuts import render
-
+import datetime
 from mylibrary.models import *
-
+from django.contrib import messages
+from django.shortcuts import redirect, render
+from django.template.context_processors import request
+from django.contrib.auth.decorators import login_required, permission_required
 
 def search_book(request):
     context = {}
@@ -107,3 +106,12 @@ def tutor(request):
                         'count' : count
                     }
     )
+
+@login_required
+def book_delete(request, num):
+    if request.user.is_superuser:
+        book = Book_info.objects.get(pk=num)
+        book.delete()
+        return redirect('math')
+    else:
+        return redirect('math')

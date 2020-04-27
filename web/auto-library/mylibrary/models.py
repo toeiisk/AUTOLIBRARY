@@ -47,7 +47,7 @@ class Publisher(models.Model):
     name = models.CharField(max_length=250, default='SOME STRING')
     address = models.CharField(max_length=250, default='SOME STRING')
     def __str__(self):
-        return '(%s) %s' %(self.id, self.name)
+        return '%s' %(self.name)
     class Meta:
         ordering=('name',)
         verbose_name='เพิ่มสำนักพิมพ์'

@@ -1,11 +1,16 @@
-from fnmatch import filter
 import datetime
+import json
+import random
+from fnmatch import filter
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
 from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+
 from mylibrary.models import *
-import random
+
 from .forms import *
 
 
@@ -145,3 +150,5 @@ def borrow_tutor(request, num):
         'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         'expire_date': (datetime.now()+timedelta(minutes=15)).strftime("%Y-%m-%d %H:%M:%S")
     })
+
+

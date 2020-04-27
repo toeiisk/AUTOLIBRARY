@@ -28,6 +28,8 @@
                         <p class="h5 card-text">จำนวนที่มี: {{ bk.amount_book }}</p>
                         <hr>
                         <a href="{% url 'blogbook' bk.id%}" class="btn btn-outline-info mt-auto text-center">DETAIL</a>
+                        <a href="{% url 'book_delete' num=bk.id %}" class="btn btn-outline-danger mt-auto text-center"
+                            onclick="return confirm('Are you sure you want to delete this?')">DELETE</a>
                     </div>
                 </div>
             </div>
@@ -53,6 +55,9 @@
                             <hr>
                             <a href="{% url 'blogbook' bk.id%}"
                                 class="btn btn-outline-info mt-auto text-center">DETAIL</a>
+                            <a href="{% url 'book_delete' num=bk.id %}"
+                                class="btn btn-outline-danger mt-auto text-center"
+                                onclick="return confirm('Are you sure you want to delete this?')">DELETE</a>
                         </div>
                     </div>
                 </div>

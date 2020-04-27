@@ -12,5 +12,5 @@ urlpatterns = [
     path('checkbook/', views.checkbook, name='checkbook'),
     path('checkcom/', views.checkcom, name='checkcom'),
     path('checktutorroom/', views.checktutorroom, name='checktutorroom'),
-    path('testapi/', views.testapi, name='testapi')
+    path('testapi/', views.testapi, name='testapi'),
 ]

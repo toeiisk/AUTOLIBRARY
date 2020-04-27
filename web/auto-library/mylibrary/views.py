@@ -8,10 +8,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import action
 from mylibrary.models import *
 from mylibrary.serializers import *
-from django.views.decorators.csrf import csrf_exempt
-
 
 
 # Create your views here.
@@ -161,3 +161,7 @@ def testapi(request):
             return JsonResponse(serializer.data, status=201)
         else:
             return JsonResponse(serializer.errors, status=400)
+
+
+
+

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Book_info, Book_type, All_type, Computer
+from .models import *
 
 
 
