@@ -20,14 +20,11 @@
 			{% endif %}
     </div>
 
-    <form class="form-signin" action="{% url 'login' %}" method="POST">
+    <form class="form-signin" method="POST">
         {% csrf_token %}
         <h2 class="form-signin-heading mb-3">Please login</h2>
-        <input type="text" class="form-control mb-3" name="username" placeholder="Username" required=""
-            autofocus="" />
-        <input type="password" class="form-control mb-3" name="password" placeholder="Password" required="" />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-        {{error}}
+        {{ form }}
+        <button class="btn btn-lg btn-primary btn-block mt-5" type="submit">Login</button>
     </form>
 </div>
 {% endblock %}

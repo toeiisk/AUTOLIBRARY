@@ -1,7 +1,7 @@
 import json
 from datetime import date, datetime, timedelta
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.views import auth_logout
 from django.core.exceptions import ObjectDoesNotExist
@@ -12,6 +12,9 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import action
 from mylibrary.models import *
 from mylibrary.serializers import *
+from .forms import UserLoginForm
+from django.contrib.auth import authenticate, get_user_model, login, logout
+
 
 
 # Create your views here.
@@ -23,28 +26,44 @@ def index(request):
         }
     )
 
-def auth_login(request):
-    context = {}
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user:
-            login(request, user)
-            next_url = request.POST.get('next_url')
-            if next_url: 
-                return redirect(next_url)
-            else:
-                return redirect('index')
+# def auth_login(request):
+#     context = {}
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         user = authenticate(request, username=username, password=password)
+#         if user:
+#             login(request, user)
+#             next_url = request.POST.get('next_url')
+#             if next_url: 
+#                 return redirect(next_url)
+#             else:
+#                 return redirect('index')
+#         else:
+#             error = "Username or Password Incorrect!!"
+#             context['username'] = username
+#             context['password'] = password
+#             context['error'] = "Username or Password Incorrect!!"
+#             return render(request, 'login.html', context)
+#         pass
+#     else:
+#         return render(request, 'login.html', context)
+
+@csrf_exempt
+def user_login(request):
+    title = "Login"
+    form = UserLoginForm(request.POST or None)
+    if form.is_valid():
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        next_url = request.POST.get('next_url')
+        if next_url: 
+            return redirect(next_url)
         else:
-            error = "Username or Password Incorrect!!"
-            context['username'] = username
-            context['password'] = password
-            context['error'] = "Username or Password Incorrect!!"
-            return render(request, 'login.html', context)
-        pass
-    else:
-        return render(request, 'login.html', context)
+            return redirect('index')
+    return render(request, 'login.html', {"form":form, "title":title})
 
 def register(request):
     context = {}

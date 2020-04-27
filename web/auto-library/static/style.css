@@ -14,11 +14,14 @@ html, body {
 }
 
 .form-signin {
-  max-width: 380px;
+  max-width: 500px;
   padding: 15px 35px 45px;
   margin: 0 auto;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+  background: #fff;
+  border-radius: 12px;
   .form-signin-heading, .checkbox {
     margin-bottom: 30px;
   }
