@@ -84,6 +84,7 @@ class Book_info(models.Model):
     published_id = models.ForeignKey(Publisher, on_delete=models.CASCADE)
 
     class Meta:
+        get_latest_by = "order_date"
         ordering=('name_book',)
         verbose_name='เพิ่มหนังสือ'
         verbose_name_plural="หนังสือทั้งหมด"

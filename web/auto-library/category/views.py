@@ -15,10 +15,11 @@ def search_book(request):
     return render(request, 'category/index.html', context=context)
 
 def math(request):
-    allbook = Book_info.objects.all()
+    allbook = Book_info.objects.order_by('id')
     publisher = Publisher.objects.all()
     booktype = Book_type.objects.all()
     alltype = All_type.objects.all()
+    print(allbook)
     
     return render (request, 'category/mathpage.html',
                     context = {
