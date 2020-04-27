@@ -1,7 +1,9 @@
 import json
 from datetime import date, datetime, timedelta
-from django.contrib import messages
 
+from django.contrib import messages
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.views import auth_logout
 from django.core.exceptions import ObjectDoesNotExist
@@ -10,11 +12,11 @@ from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import action
+
 from mylibrary.models import *
 from mylibrary.serializers import *
-from .forms import UserLoginForm
-from django.contrib.auth import authenticate, get_user_model, login, logout
 
+from .forms import UserLoginForm
 
 
 # Create your views here.
@@ -26,30 +28,6 @@ def index(request):
         }
     )
 
-# def auth_login(request):
-#     context = {}
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = authenticate(request, username=username, password=password)
-#         if user:
-#             login(request, user)
-#             next_url = request.POST.get('next_url')
-#             if next_url: 
-#                 return redirect(next_url)
-#             else:
-#                 return redirect('index')
-#         else:
-#             error = "Username or Password Incorrect!!"
-#             context['username'] = username
-#             context['password'] = password
-#             context['error'] = "Username or Password Incorrect!!"
-#             return render(request, 'login.html', context)
-#         pass
-#     else:
-#         return render(request, 'login.html', context)
-
-@csrf_exempt
 def user_login(request):
     title = "Login"
     form = UserLoginForm(request.POST or None)
@@ -101,29 +79,12 @@ def register(request):
             context['error'] = str(e)
     return render(request, 'register.html', context=context)
 
+@login_required
 def my_logout(request):
     logout(request)
     return redirect('index')
 
-# def borrowed(request, num):
-#     user = request.user
-#     dateborrow = datetime.now()
-#     datereturn = datetime.now()+timedelta(days=7)
-#     book_user = Book_info.objects.get(pk=num)
-#     post = Borrow_Notes(
-#         book_isbn = book_user, 
-#         date = dateborrow, 
-#         return_date = datereturn,
-#         borrow_user = user)
-#     post.save()
-    
-#     num = 1
-#     number = book_user.amount_book
-#     total =  number - num
-#     book_user.amount_book = total
-#     book_user.save()
-#     return redirect('dashboard')
-
+@login_required
 def dashboard(request):
     user = request.user.id
     book = Borrow_Notes.objects.filter(borrow_user=user)
@@ -141,29 +102,37 @@ def dashboard(request):
         }
     )
 
-def addbook(request):
-    if request.method == "POST":
-        data = json.loads
-
+@login_required
 def checkbook(request):
-    history = CalculateFines.objects.all()
-    return render(request, 'checkbook.html', context={
-        'history' : history
-    })
+    if request.user.is_superuser:
+        history = CalculateFines.objects.all()
+        return render(request, 'checkbook.html', context={'history' : history})
+    else:
+        messages.error(request, 'You not have permission!!!')
+        return redirect('index')
 
+@login_required
 def checkcom(request):
-    checkcom = Borrower_Computer.objects.all()
-    
-    return render(request, 'checkcom.html', context={
-        'checkcom' : checkcom,
-        
-    })
+    if request.user.is_superuser:
+        checkcom = Borrower_Computer.objects.all()
+        return render(request, 'checkcom.html', context={
+            'checkcom' : checkcom,   
+        })
+    else:
+        messages.error(request, 'You not have per')
+        return redirect('index')
 
+@login_required
 def checktutorroom(request):
-    checkroom = Borrower_Tutor_Room.objects.all()
-    return render(request, 'checktutorroom.html', context={
-        'checkroom' : checkroom
-    })
+    if request.user.is_superuser:
+        checkroom = Borrower_Tutor_Room.objects.all()
+        return render(request, 'checktutorroom.html', context={
+            'checkroom' : checkroom
+        })
+    else:
+        messages.error(request, 'You not have permission!!!')
+        return redirect('index')
+
 
 @csrf_exempt
 def testapi(request):
@@ -180,7 +149,3 @@ def testapi(request):
             return JsonResponse(serializer.data, status=201)
         else:
             return JsonResponse(serializer.errors, status=400)
-
-
-
-

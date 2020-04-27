@@ -109,6 +109,7 @@ def tutor(request):
     )
 
 @login_required
+@permission_required('mylibrary.delete_book_info')
 def book_delete(request, num):
     if request.user.is_superuser:
         book = Book_info.objects.get(pk=num)

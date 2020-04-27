@@ -4,7 +4,7 @@ import random
 from fnmatch import filter
 
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -16,6 +16,8 @@ from .forms import *
 
 # Create your views here.
 @login_required
+@permission_required('mylibrary.add_borrow_notes')
+@permission_required('mylibrary.view_borrow_notes')
 def borrow_book(request, num):
     book = Book_info.objects.get(pk=num)
     user = request.user
@@ -52,6 +54,8 @@ def borrow_book(request, num):
     })
 
 @login_required
+@permission_required('mylibrary.add_borrower_computer')
+@permission_required('mylibrary.view_borrower_computer')
 def borrow_com(request, num):
     computer_id = Computer.objects.get(pk=num)
     user = request.user
@@ -103,6 +107,8 @@ def borrow_com(request, num):
     })
 
 @login_required
+@permission_required('mylibrary.add_borrower_tutor_room')
+@permission_required('mylibrary.view_borrower_tutor_room')
 def borrow_tutor(request, num):
     tutorroom_id = Tutor_room.objects.get(pk=num)
     user = request.user
@@ -150,5 +156,3 @@ def borrow_tutor(request, num):
         'date': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         'expire_date': (datetime.now()+timedelta(minutes=15)).strftime("%Y-%m-%d %H:%M:%S")
     })
-
-
