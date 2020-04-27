@@ -8,5 +8,6 @@ urlpatterns = [
     path('tutor/', views.tutor, name='tutor'),
     path('book/<int:num>/', views.blogbook, name='blogbook'),
     path('search/', views.search_book, name="search_book"),
-    path('book_info/<int:num>/delete/', views.book_delete, name='book_delete'),
+    path('book_info/<int:num>/delete/', views.book_delete_math, name='book_delete_math'),
+    path('book_info/<int:num>/delete/', views.book_delete_science, name='book_delete_science'),
 ]

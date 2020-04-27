@@ -2,6 +2,7 @@ import pytz
 import datetime
 from mylibrary.models import *
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.context_processors import request
 from django.contrib.auth.decorators import login_required, permission_required
@@ -19,8 +20,7 @@ def math(request):
     publisher = Publisher.objects.all()
     booktype = Book_type.objects.all()
     alltype = All_type.objects.all()
-    print(allbook)
-    
+
     return render (request, 'category/mathpage.html',
                     context = {
                         'allbook' : allbook,
@@ -110,10 +110,20 @@ def tutor(request):
 
 @login_required
 @permission_required('mylibrary.delete_book_info')
-def book_delete(request, num):
+def book_delete_math(request, num):
     if request.user.is_superuser:
         book = Book_info.objects.get(pk=num)
         book.delete()
         return redirect('math')
     else:
         return redirect('math')
+
+@login_required
+@permission_required('mylibrary.delete_book_info')
+def book_delete_science(request, num):
+    if request.user.is_superuser:
+        book = Book_info.objects.get(pk=num)
+        book.delete()
+        return redirect('science')
+    else:
+        return redirect('science')
