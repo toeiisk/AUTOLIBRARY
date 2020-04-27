@@ -14,8 +14,8 @@ def return_book(request,num):
     
     datenow = datetime.now().date()
     # วันที่คืน - วันปัจจุบัน
-    # Diff = (chek_date - datenow)
-    Diff = (datenow - chek_date)
+    Diff = (chek_date - datenow)
+    # Diff = (datenow - chek_date)
     count = ( Diff.days * 10)
     rate = Diff.days
     paycheck = 1
@@ -50,13 +50,20 @@ def return_book(request,num):
 def payment_complete(request, num):
     
     result =  CalculateFines.objects.filter(pk=num).values()
+    updatecalculate =  CalculateFines.objects.get(pk=num)
     checkpay = 2
     datenow = datetime.now().date()
+    
     
     for i in result:
         # ดึง id ของ user ใน Model Calculate
         test = i['borrow_user_id'] 
     
+    updatecalculate.status_cal = 'COMPLETE'
+    updatecalculate.save()
+    
+
+
     note_borrow = Borrow_Notes.objects.get(pk=test)
     check = Book_info.objects.get(pk=note_borrow.book_isbn.id)    
     return_date = note_borrow.return_date.date()
