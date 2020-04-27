@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^register/$', views.register,name='register'),
     path('checkbook/', views.checkbook, name='checkbook'),
     path('checkcom/', views.checkcom, name='checkcom'),
-    path('checktutorroom/', views.checktutorroom, name='checktutorroom')
+    path('checktutorroom/', views.checktutorroom, name='checktutorroom'),
+    path('testapi/', views.testapi, name='testapi')
 ]

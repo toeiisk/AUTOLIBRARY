@@ -9,6 +9,9 @@ from django.core.mail import send_mail
 from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
 from mylibrary.models import *
+from mylibrary.serializers import *
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 # Create your views here.
@@ -142,3 +145,19 @@ def checktutorroom(request):
     return render(request, 'checktutorroom.html', context={
         'checkroom' : checkroom
     })
+
+@csrf_exempt
+def testapi(request):
+    if request.method == 'GET':
+        big_type = Computer.objects.all()
+        serializer = ComputerSerializer(big_type, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        serializer = ComputerSerializer(data=request.POST)
+        print(serializer)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        else:
+            return JsonResponse(serializer.errors, status=400)
