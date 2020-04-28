@@ -42,8 +42,5 @@
         {% endif %}
         {% endfor %}
     </div>
-    {% if user.is_superuser %}
-    <a href="{% url 'add_book' %}" role="button" type="button" class="btn btn-warning btn-lg btn-block">ADD BOOK</a>
-    {% endif %}
 </div>
 {% endblock %}

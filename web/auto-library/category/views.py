@@ -16,7 +16,7 @@ def search_book(request):
     return render(request, 'category/index.html', context=context)
 
 def math(request):
-    allbook = Book_info.objects.order_by('id')
+    allbook = Book_info.objects.all()
     publisher = Publisher.objects.all()
     booktype = Book_type.objects.all()
     alltype = All_type.objects.all()
@@ -70,14 +70,13 @@ def computer(request):
     datenow = pytz.utc.localize(datenow)
     datenow = datenow.replace(tzinfo=pytz.utc)
     for i in computer:
-        if i.status_com == 'UNAVAILABLE':
-            borrower_computer = Borrower_Computer.objects.filter(computer=i.id)
-            # print('++++++++++++++++++++++++++++++', borrower_computer)
-            if (borrower_computer[len(borrower_computer)-1].expire_date < datenow):
-                i.status_com = 'AVAILABLE'
+        if i.status_com == 'UNAVAILABLE': #เช็คสถานะคอมถ้าไม่ว่าง
+            borrower_computer = Borrower_Computer.objects.filter(computer=i.id) #ดึงการจองคอมว่ามีคอมนี้ถูกจองไหม
+            if (borrower_computer[len(borrower_computer)-1].expire_date < datenow): #ดึงการยืมคอมล่าสุดเพื่อเช็คเวลาว่าหมดหรือยังเทียบกับเวลาปัจจุบัน
+                i.status_com = 'AVAILABLE' #เปลี่ยนสถานะเป็นว่าง
                 i.save()
             print(borrower_computer[len(borrower_computer)-1].expire_date - datenow, '++++++++++')
-        if i.status_com == 'AVAILABLE':
+        if i.status_com == 'AVAILABLE': #นับสถานะคอม่ที่ว่างไปแสดง
             count += 1
     return render (request, 'category/computerpage.html', 
                     context = {
