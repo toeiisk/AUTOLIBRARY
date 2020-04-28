@@ -22,6 +22,7 @@ def borrow_book(request, num):
         if form.is_valid():            
             date = form.cleaned_data['date']
             return_date = form.cleaned_data['return_date']
+            #ดึงข้อมูลจากฟอร์ม เพื่อเอามาบันทึกใน Borrow_note
             post = Borrow_Notes(
                 book_isbn = book, 
                 borrow_user = user,
@@ -30,14 +31,15 @@ def borrow_book(request, num):
             )
             post.save()
 
-        num = 1
-        number = book.amount_book
+        num = 1 #เพื่อเอาไปลบกับหนังสือทั้งหมดใน catagory
+        number = book.amount_book  #ดึงจำนวนหนังสือ
         total =  number - num
         book.amount_book = total #ลดจำนวนหนังสือเมื่อยืม
         book.save()
 
         date_return = post.return_date
         user_book_note = post
+        #นำไปบันทึกใน Calculatefines เพื่อใช้คิดกรณีว่าเกินหรือไม่เกินวันที่คืน
         postreturn = CalculateFines(date=date_return, borrow_user=user_book_note, user_id=user, charg=0, name_book= book.name_book)
         postreturn.status_cal = 'UNCOMPLETE'
         postreturn.save()

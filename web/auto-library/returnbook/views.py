@@ -10,19 +10,20 @@ def return_book(request,num):
     returnbook = Borrow_Notes.objects.get(pk=num)
     calculatefine = CalculateFines.objects.filter(borrow_user=returnbook)
     
-    # เช็คจำนวนหนังสือ
+    #ดึงจำนวณหนีงสือออกมา
     check = Book_info.objects.get(pk=returnbook.book_isbn.id)
     for i in calculatefine:
         chek_date = i.date.date()
     
     datenow = datetime.now().date()
     # วันที่คืน - วันปัจจุบัน
-    Diff = (chek_date - datenow)
-    # Diff = (datenow - chek_date)
+    # Diff = (chek_date - datenow)
+    Diff = (datenow - chek_date)
     count = ( Diff.days * 10)
     rate = Diff.days
     paycheck = 1
     
+    #กรณีคืนยังไม่เลยกำหนด
     if count <= 0:
         for i in calculatefine:
             rate = 0
