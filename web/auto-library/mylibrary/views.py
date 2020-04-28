@@ -1,6 +1,5 @@
 import json
 from datetime import date, datetime, timedelta
-
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
@@ -12,10 +11,8 @@ from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import action
-
 from mylibrary.models import *
 from mylibrary.serializers import *
-
 from .forms import UserLoginForm
 
 
