@@ -30,8 +30,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://kit.fontawesome.com/64870b35bd.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://kit.fontawesome.com/64870b35bd.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -55,6 +55,10 @@
               ADMIN MENU
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item h5 text-dark" href="{% url 'math' %}">MATH</a>
+              <a class="dropdown-item h5 text-dark" href="{% url 'science' %}">SCIENCE</a>
+              <a class="dropdown-item h5 text-dark" href="{% url 'computer' %}">Computer</a>
+              <a class="dropdown-item h5 text-dark" href="{% url 'tutor' %}">TutorRoom</a>
               <a class="dropdown-item h5 text-dark" href="{% url 'checkbook' %}">Check Book</a>
               <a class="dropdown-item h5 text-dark" href="{% url 'checkcom' %}">Check Computer</a>
               <a class="dropdown-item h5 text-dark" href="{% url 'checktutorroom' %}">Check Tutorroom</a>
@@ -95,12 +99,6 @@
           </li>
           {% endif %}
           </li>
-          {% comment %} <li class="nav-item">
-            <a class="nav-link h5 text-light" href="{% url 'computer' %}">Computer</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link h5 text-light" href="{% url 'tutor' %}">TutorRoom</a>
-          </li> {% endcomment %}
         </ul>
         <ul class="navbar-nav">
           <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search_book' %}">
