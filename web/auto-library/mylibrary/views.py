@@ -116,7 +116,7 @@ def checkcom(request):
             'checkcom' : checkcom,   
         })
     else:
-        messages.error(request, 'You not have per')
+        messages.error(request, 'You not have permission')
         return redirect('index')
 
 @login_required

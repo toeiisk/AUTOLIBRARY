@@ -67,8 +67,6 @@ def payment_complete(request, num):
     updatecalculate.status_cal = 'COMPLETE'
     updatecalculate.save()
     
-
-
     note_borrow = Borrow_Notes.objects.get(pk=test)
     check = Book_info.objects.get(pk=note_borrow.book_isbn.id)    
     return_date = note_borrow.return_date.date()
