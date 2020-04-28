@@ -1,7 +1,10 @@
 
 from .forms import *
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required, permission_required
 
+@login_required
+@permission_required('mylibrary.view_calculatefines')
 # Create your views here.
 def return_book(request,num):
     returnbook = Borrow_Notes.objects.get(pk=num)
@@ -46,7 +49,8 @@ def return_book(request,num):
             'rate' : rate
         })
 
-
+@login_required
+@permission_required('mylibrary.view_calculatefines')
 def payment_complete(request, num):
     
     result =  CalculateFines.objects.filter(pk=num).values()

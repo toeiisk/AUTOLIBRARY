@@ -25,6 +25,7 @@
         <h2 class="form-signin-heading mb-3">Please login</h2>
         {{ form }}
         <button class="btn btn-lg btn-primary btn-block mt-5" type="submit">Login</button>
+		<input type="hidden" name="next_url" value="{{ next_url }}">
     </form>
 </div>
 {% endblock %}
