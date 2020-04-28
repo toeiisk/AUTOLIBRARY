@@ -3,11 +3,11 @@
 {% block content %}
 
 {% if messages %}
-    {% for message in messages %}
-    <script>
-        alert('{{ message }}');
-    </script>
-    {% endfor %}
+{% for message in messages %}
+<script>
+    alert('{{ message }}');
+</script>
+{% endfor %}
 {% endif %}
 
 <header class="masthead">
@@ -26,7 +26,8 @@
             <span class="h2 text-uppercase font-weight-bold text-danger">book</span>
             <span class="h2 text-uppercase font-weight-bold">recomended</span>
         </div>
-        <p class="h4 mt-3" style="line-height: 1.8;">เป็นหนังสือที่เหมาะกับการอ่านในช่วงเวลาว่าง สามารถอ่านได้ทุกเพศ
+        <p class="h4 mt-3" style="line-height: 1.8; text-indent: 3em;">เป็นหนังสือที่เหมาะกับการอ่านในช่วงเวลาว่าง
+            สามารถอ่านได้ทุกเพศ
             ทุกวัย
             ช่วยให้ความรู้ ความคิด เเละคติการใช้ชีวิตต่างๆ ถ้าท่านสนใจสามารถกด 'คลิ๊กดูข้อมูลเพิ่มเติม'
             เพื่อเข้าไปสู่คำอธิบายหนังสือคร่าวๆ เเละถ้าท่านสนใจยืมสามารถกดปุ่มยืมด้านล่างหลังจาก
@@ -56,41 +57,103 @@
 
 <div class="blog mt-5 py-5 bg-light">
     <div class="container">
-        <div class="h2 text-center">BLOG OUR</div>
-        <p class="h4 mt-3 mb-3" style="line-height: 1.8;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-            do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="h2 text-center">ทำไมเราต้องอ่านหนังสือ ?</div>
+        <img src="{% static 'img.jpeg' %}" class="img-fluid my-3" alt="Responsive image">
+        <p class="h5 mt-3 mb-3" style="line-height: 1.8; text-indent: 3em;">การอ่านหนังสือได้เยอะๆ
+            เป็นทักษะที่เจ้าของธุรกิจ
+            และคนที่อยากประสบความสำเร็จจำเป็นต้องมี มันคือการลงทุนราคาถูกที่อาจนำมาซึ่งผลตอบแทนมากมายไม่มีสิ้นสุด
+            ผู้เชี่ยวชาญระดับโลกอาจทำงานมามากกว่า 20 ปี เพียงเพื่อทำการวิจัยอะไรบางอย่าง
+            บางคนก็ทุ่มทั้งชีวิตให้กับการหาคำตอบของคำถามเพียงคำถามเดียว แล้วกลั่นออกมาเป็นหนังสือหนึ่งเล่ม</p>
+
+        <p class="h5 mt-3 mb-3" style="line-height: 1.8;">และนี่ก็คือเหตุผลว่า ทำไมการอ่านหนังสือถึงช่วยให้คุณฉลาดขึ้น
+            ก้าวหน้าขึ้น และสุขภาพดีขึ้น
+            แถมดีกว่าการอ่านบนอุปกรณ์อิเล็กทรอสิกส์ (E-book)</p>
+
+        <p class="h4 mt-3 mb-3 font-weight-bolder" style="line-height: 1.8;">1.
+            หนังสือเป็นแหล่งช่วยพัฒนาความเข้าใจและความจำ</p>
+
+        <p class="h5 mt-3 mb-3" style="line-height: 1.8; text-indent: 3em;">เมื่อไม่กี่ปีมานี้
+            มีงานวิจัยมากมายที่เปรียบเทียบข้อดีและข้อเสียระหว่างการอ่านหนังสือเป็นเล่มกับการอ่านบนอุปกรณ์อิเล็กทรอนิกส์
+            และ ผลลัพธ์ส่วนใหญ่ ชี้ว่า “การอ่านจากหน้าจอส่วนใหญ่แล้วจะเป็นลักษณะการอ่านแบบอ่านคร่าวๆ หาเฉพาะคีย์เวิร์ด
+            และอ่านแค่เพียงรอบเดียวเท่านั้น” เป็นผลทำให้ความเข้าใจในตัวเนื้อหาลดน้อยลงและได้ข้อมูลไม่ครบถ้วนเท่าที่ควร
+        </p>
+
+        <p class="h5 mt-3 mb-3" style="line-height: 1.8;">การอ่านเนื้อหาจากหนังสือต่างหาก ที่ให้ผลดีกับคุณที่สุด
+            งานวิจัย ชี้ว่า
+            “การอ่านหนังสือเป็นเล่มจะส่งผลให้เนื้อหาที่อ่านมาเป็นส่วนหนึ่งของความทรงจำได้ดีกว่าอ่านบนอุปกรณ์อิเล็กทรอนิกส์”
+            หากคุณอยากทำความเข้าใจและได้รับข้อมูลความรู้แบบมากที่สุด คุณก็ควรหาอ่านหนังสือแบบเป็นเล่มๆ</p>
+
+        <p class="h4 mt-3 mb-3 font-weight-bolder" style="line-height: 1.8;">2.
+            การอ่านหนังสือช่วยในเรื่องสุขภาพตาและการนอนหลับ</p>
+
+        <p class="h5 mt-3 mb-3" style="line-height: 1.8; text-indent: 3em;">อีกหนึ่งข้อดีของการอ่านหนังสือเป็นเล่ม
+            แทนที่จะอ่านบนอุปกรณ์อิเล็กทรอนิกส์ ก็คือ มันดีต่อสุขภาพของคุณ งานวิจัย จากฮาร์วาร์ด พบว่า “แสงสีฟ้า (blue
+            light) ที่แผ่ออกมาจากอุปกรณ์อิเล็กทรอนิกส์ต่างๆ จะส่งผลเสียต่อร่างกายได้”
+        </p>
+
+        <p class="h5 mt-3 mb-3" style="line-height: 1.8;">แสงสีฟ้าเป็นแสงที่จะไปยับยั้งฮอร์โมนเมลาโทนิน
+            ซึ่งส่งผลต่อนาฬิกาชีวิตและจะเพิ่มความตื่นตัวให้ตัวคุณในช่วงเวลาที่คุณไม่ควรตื่นตัว นักวิทยาศาสตร์กล่าวว่า
+            “การได้รับแสงสีฟ้าจากอุปกรณ์อิเล็กทรอนิกส์ใดๆ ก็ตามก่อนนอนเป็นเรื่องที่น่าเป็นห่วง
+            เนื่องจากอิทธิพลของมันจะมาทำลายระบบการหลับและการตื่นของร่างกาย
+            ซึ่งนั่นจะส่งผลต่อการพักผ่อนของคุณอย่างถาวรเลย”</p>
+
+        <p class="h5 mt-3 mb-3" style="line-height: 1.8;">กลับมาสู่โลกความเป็นจริงกันเถอะ เราควรรู้จัก “พักวาง”
+            อุปกรณ์อิเล็กทรอนิกส์ต่างๆ บ้างในแต่ละวัน และการอ่านหนังสือจริงๆสักเล่ม
+            อาจช่วยให้คุณละออกจากอุปกรณ์อิเล็กทรอนิกส์รอบตัวคุณได้บ้าง</p>
+
+        <p class="h4 mt-3 mb-3 font-weight-bolder" style="line-height: 1.8;">3.
+            การอ่านหนังสือให้ความรู้สึกถึงความคืบหน้า</p>
+
+        <p class="h5 mt-3 mb-3" style="line-height: 1.8; text-indent: 3em;">ลองคิดถึงครั้งสุดท้ายที่คุณอ่านหนังสือสำคัญๆ
+            สักเล่มดูสิ คุณจำได้ไหมว่า คุณรู้สึกภูมิใจแค่ไหนตอนที่คุณกำลังพลิกหน้าสุดท้ายของเล่ม?
+        </p>
+
+        <p class="h5 mt-3 mb-3" style="line-height: 1.8;">ข้อดีทางจิตวิทยาข้อหนึ่งจากการอ่านหนังสือก็คือ การที่เรา
+            รู้สึกคืบหน้า และภูมิใจในขณะที่กำลังเปลี่ยนหน้านั่นเอง คุณจะเห็นหนังสือฝั่งซ้ายค่อยๆหนาขึ้น
+            ในขณะที่ฝั่งขวาก็เริ่มบางลง คุณจะรู้สึกว่าคุณมีความคืบหน้า ซึ่งจะทำให้คุณรู้สึกดีมากๆ
+            เพราะมันคือประสบการณ์และการผจญภัยอย่างหนึ่ง</p>
+
+        <p class="h5 mt-3 mb-3" style="line-height: 1.8;">มันไม่ใช่เพียงแค่ความรู้สึกภาคภูมิใจเท่านั้น
+            แต่หนังสือจะเป็นเหมือนตัวแทน การเดินทางของสติปัญญา ของคุณ
+            ที่คุณสามารถตั้งไว้ที่ออฟฟิศหรือบ้านเพื่อแสดงให้ทุกคนเห็นว่าคุณสนใจอะไร
+            สิ่งที่เราวางไว้บนชั้นหนังสือหรือโต๊ะหนังสือคือสิ่งที่แสดงถึงลักษณะนิสัยของเรา เราพูดถึงมัน เรามองดูมัน
+            เราอ้างถึงมัน มันทำให้ผู้คนรู้จักเข้าใจเรามากขึ้น และในหลายๆ ครั้ง ก็เป็นหัวข้อในการเริ่มบทสนทนาที่ดีทีเดียว
+        </p>
+
+        <p class="h5 mt-3 mb-3 text-primary font-weight-bolder" style="line-height: 1.8;">Source : Entrepreneur</p>
+
+
         <div class="row mt-5">
             <div class="col-lg-4 col-sm-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title">ว่าด้วยเรื่องการอ่านหนังสือ</h5>
                         <p class="card-text">@Pondd Sugthana</p>
                         <p class="card-text">Jul 19, 2016</p>
-                        <a href="https://medium.com/@pondd/%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AD%E0%B9%88%E0%B8%B2%E0%B8%99%E0%B8%AB%E0%B8%99%E0%B8%B1%E0%B8%87%E0%B8%AA%E0%B8%B7%E0%B8%AD-fee94ab6c155" 
-                        class="btn btn-primary">Read more</a>
+                        <a href="https://medium.com/@pondd/%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AD%E0%B9%88%E0%B8%B2%E0%B8%99%E0%B8%AB%E0%B8%99%E0%B8%B1%E0%B8%87%E0%B8%AA%E0%B8%B7%E0%B8%AD-fee94ab6c155"
+                            class="btn btn-outline-info btn-block mt-auto">Read more</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">ทุกวันนี้ ความรู้เราพัฒนาไปแค่ไหนกันนะ ?</h5>
+                        <p class="card-text">@Pichet Itngam (notsu)</p>
+                        <p class="card-text">Jul 12, 2015</p>
+                        <a href="https://notsu.me/คุณอ่านหนังสือแบบไหนกันนะ-5661069ae3ef"
+                            class="btn btn-outline-info btn-block mt-auto">Read more</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">วิธีอ่านหนังสืออย่างมีคุณภาพ (สำหรับผม)</h5>
+                        <p class="card-text">@Sitthavee Teerakulchon (Son)</p>
+                        <p class="card-text">Sep 14, 2017</p>
+                        <a href="https://medium.com/@SitthaveeTeerakulchon/my-reading-153952524f48"
+                            class="btn btn-outline-info btn-block mt-auto">Read more</a>
                     </div>
                 </div>
             </div>
